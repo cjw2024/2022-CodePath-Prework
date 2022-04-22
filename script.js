@@ -6,9 +6,10 @@ var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5; //must be between 0.0 and 1.0
 var guessCounter = 0;
+var clueHoldTime = 1000;
 
 //Global Constants
-const clueHoldTime = 1000; //how long to hold each clue's light/sound
+//const clueHoldTime = 1000; //how long to hold each clue's light/sound
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 
@@ -31,6 +32,7 @@ function playClueSequence() {
     delay += clueHoldTime;
     delay += cluePauseTime;
   }
+  clueHoldTime-= 100;
 }
 
 function startGame() {
@@ -97,10 +99,10 @@ function guess(btn){
 
 // Sound Synthesis Functions
 const freqMap = {
-  1: 261.6,
-  2: 329.6,
-  3: 392,
-  4: 466.2,
+  1: 200,
+  2: 300,
+  3: 400,
+  4: 500,
 };
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
