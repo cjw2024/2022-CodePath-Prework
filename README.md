@@ -4,7 +4,7 @@
 
 Submitted by: **Caden Wright**
 
-Time spent: **#** hours spent in total
+Time spent: **9** hours spent in total
 
 Link to project: (https://glitch.com/edit/#!/fossil-cooked-troodon)
 
@@ -36,7 +36,7 @@ The following **additional** features are implemented:
 
 - [x] List anything else that you can get done to improve the app!
   - Each time a life is lost it alerts the user
-  -
+  
 
 ## Video Walkthrough (GIF)
 
