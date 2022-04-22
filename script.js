@@ -1,12 +1,13 @@
 
 //Global Variables
-var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
+var pattern = [Math.floor(Math.random()*4)+1, 2, 4, 3, 2, 1, 2, 4];
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5; //must be between 0.0 and 1.0
 var guessCounter = 0;
 var clueHoldTime = 1000;
+var lives = 0;
 
 //Global Constants
 //const clueHoldTime = 1000; //how long to hold each clue's light/sound
@@ -37,8 +38,12 @@ function playClueSequence() {
 
 function startGame() {
   //initialize game variables
+  clueHoldTime = 1000;
   progress = 0;
   gamePlaying = true;
+  for(var i = 0; i < pattern.length; i++){
+    pattern[i] = Math.floor(Math.random()*5)+1;
+  }
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
@@ -64,6 +69,10 @@ function winGame(){
   alert("You Won, Congratulations!");
 }
 
+function lifeLost(){
+  alert("You lost a life!");
+}
+
 function lightButton(btn) {
   document.getElementById("button" + btn).classList.add("lit");
 }
@@ -79,7 +88,14 @@ function guess(btn){
   }
   if(btn != pattern[guessCounter]){
     //incorrect
-    loseGame();  //game over
+    lives++;
+    if(lives == 3){
+      loseGame();  //game over
+    } else{
+      lifeLost();
+      clueHoldTime+=100;
+      playClueSequence();
+    }
   } else {
     //correct
     if(progress == guessCounter){
@@ -103,6 +119,7 @@ const freqMap = {
   2: 300,
   3: 400,
   4: 500,
+  5: 600,
 };
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];
